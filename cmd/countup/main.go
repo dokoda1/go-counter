@@ -20,7 +20,7 @@ func main() {
 	loadEnv()
 
 	g := gen.NewGenerator(gen.Config{
-		OutPath:           "./interface/db/query",
+		OutPath:           "../../interface/db/query",
 		Mode:              gen.WithoutContext | gen.WithDefaultQuery | gen.WithQueryInterface, // generate mode
 		FieldWithIndexTag: true,                                                               // modelのgormタグのindex節を生成する
 		FieldWithTypeTag:  true,                                                               // modelのgormタグのtype節を生成する
@@ -28,7 +28,13 @@ func main() {
 	})
 
 	//
-	sqlHandler, err := db.NewSqlHandler(os.Getenv("DB_USER"), os.Getenv("DB_PASSWORD"), os.Getenv("DB_HOST"), os.Getenv("DB_PORT"), os.Getenv("DB_NAME"))
+	sqlHandler, err := db.NewSqlHandler(
+		os.Getenv("DB_USER"),
+		os.Getenv("DB_PASSWORD"),
+		os.Getenv("DB_HOST"),
+		os.Getenv("DB_PORT"),
+		os.Getenv("DB_NAME"),
+	)
 	if err != nil {
 		fmt.Println(err.Error())
 	}
@@ -47,6 +53,5 @@ func loadEnv() {
 
 	// .envの SAMPLE_MESSAGEを取得して、messageに代入します。
 	message := os.Getenv("SAMPLE_MESSAGE")
-
 	fmt.Println(message)
 }
