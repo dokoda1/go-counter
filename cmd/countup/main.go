@@ -6,8 +6,9 @@ import (
 
 	"gorm.io/gen"
 
+	"mymodule/interface/db"
+
 	"github.com/dokoda1/go-counter"
-	"github.com/dokoda1/go-counter/interface/db"
 
 	"github.com/joho/godotenv"
 )
