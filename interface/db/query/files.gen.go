@@ -17,7 +17,7 @@ import (
 
 	"gorm.io/plugin/dbresolver"
 
-	"test/20250503/interface/db/model"
+	"github.com/dokoda1/go-counter/interface/db/model"
 )
 
 func newFile(db *gorm.DB, opts ...gen.DOOption) file {

@@ -4,11 +4,9 @@ import (
 	"fmt"
 	"os"
 
-	"gorm.io/gen"
-
-	"mymodule/interface/db"
-
 	"github.com/dokoda1/go-counter"
+	"github.com/dokoda1/go-counter/interface/db"
+	"gorm.io/gen"
 
 	"github.com/joho/godotenv"
 )
@@ -40,6 +38,13 @@ func main() {
 		fmt.Println(err.Error())
 	}
 	g.UseDB(sqlHandler.Conn) // reuse your gorm db
+
+	all := g.GenerateAllTable()
+
+	g.ApplyBasic(all...)
+
+	// Generate the code
+	g.Execute()
 }
 
 // .envを呼び出します。
@@ -51,8 +56,4 @@ func loadEnv() {
 	if err != nil {
 		fmt.Printf("読み込み出来ませんでした: %v", err)
 	}
-
-	// .envの SAMPLE_MESSAGEを取得して、messageに代入します。
-	message := os.Getenv("SAMPLE_MESSAGE")
-	fmt.Println(message)
 }
